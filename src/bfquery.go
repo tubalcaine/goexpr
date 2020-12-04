@@ -1,15 +1,17 @@
 package main
 
 import (
+	"bigfix"
 	"fmt"
 )
 
 func main() {
-	fmt.Println("Hello, world!")
+	var server bigfix.BFServer
 
-	var server BFServer
+	server.Name = "10.10.220.60"
+	server.Port = "52311"
 
-	server.name = "10.10.220.60"
+	url, _ := bigfix.BaseBFURL(server)
 
-	fmt.Println(URL(server))
+	fmt.Println(url)
 }

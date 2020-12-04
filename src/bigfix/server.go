@@ -1,17 +1,15 @@
 package bigfix
 
-import (
-	"fmt"
-)
-
+// This structure represents the definition of a BigFix server
+// and authentication to same
 type BFServer struct {
-	name string
-	port string
-	username string
-	password string
+	Name     string
+	Port     string
+	Username string
+	Password string
 }
 
-func URL(srv BFServer) int, string {
-	fmt.Println()
-	return nil, "https://" + name + ":" + port
+// This function returns the base URL of the server structure passed in
+func BaseBFURL(srv BFServer) (string, int) {
+	return "https://" + srv.Name + ":" + srv.Port, 0
 }
