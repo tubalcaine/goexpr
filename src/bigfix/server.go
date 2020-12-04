@@ -11,6 +11,7 @@ type BFServer struct {
 	password string
 }
 
-func URL() int, string {
+func URL(srv BFServer) int, string {
+	fmt.Println()
 	return nil, "https://" + name + ":" + port
 }
