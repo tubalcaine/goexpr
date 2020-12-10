@@ -15,7 +15,13 @@ func main() {
 
 	url, _ := bigfix.BaseBFURL(server)
 
-	result, err := bigfix.Query(server, "names of bes computers")
+	srq, _ := bigfix.MakeSrQuery("names of bes computers")
+
+	result, err := bigfix.Query(server, srq)
 
 	fmt.Println(url)
+	fmt.Println(result)
+	if err != nil {
+		fmt.Println(err)
+	}
 }

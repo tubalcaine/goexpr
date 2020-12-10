@@ -18,7 +18,7 @@ type BFServer struct {
 
 // BFSession - Represents a persistent connection to a BigFix server
 type BFSession struct {
-	Conn http.Client
+	Conn *http.Client
 }
 
 // BFSrQuery - Represents a session relevance query
@@ -47,23 +47,38 @@ func NewBFSession(srv BFServer) (*BFSession, error) {
 // Query - A standalone Session Relevance query using a BFServer. Not
 // a persisten session. Useful for rare, one-off queries. Use a session based
 // function when you are doing a lot of operations.
-func Query(srv BFServer, query BFSrQuery) (string, error) {
+func Query(srv BFServer, query *BFSrQuery) (string, error) {
 	var apiurl string
 
 	apiurl, _ = BaseBFURL(srv)
 	apiurl = apiurl + "/api/query"
 
 	resp, err := http.PostForm(apiurl, url.Values{"relevance": {query.SessionRelevance}})
-	defer resp.Body.Close()
 
-	result, err := ioutil.ReadAll(resp.Body)
+	if err == nil {
+		defer resp.Body.Close()
 
-	return string(result), err
+		result, err := ioutil.ReadAll(resp.Body)
+
+		return string(result), err
+	}
+
+	return "", err
 }
 
 // SessionQuery - A session based Session Relevance query using a BFServer.
 // This uses a persisten session. Useful for many queries in a single program
 // or operation.
-func SessionQuery(sess BFSession, query BFSrQuery) (string, error) {
+func SessionQuery(sess BFSession, query *BFSrQuery) (string, error) {
 	return "", nil
+}
+
+// MakeSrQuery - Make a query struct from a string
+func MakeSrQuery(qstr string) (*BFSrQuery, error) {
+	var srq BFSrQuery
+
+	srq.SessionRelevance = qstr
+	srq.encodedSessionRelevance = url.QueryEscape(qstr)
+
+	return &srq, nil
 }
