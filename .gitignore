@@ -5,6 +5,9 @@
 *.so
 *.dylib
 
+# We don't need the pkg directory involved here, at least for now
+pkg/
+
 # Test binary, build with `go test -c`
 *.test
 
@@ -16,3 +19,4 @@ bin/gopkgs
 bin/golint
 bin/godef
 bin/gocode
+
