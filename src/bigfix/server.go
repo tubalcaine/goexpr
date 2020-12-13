@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // BFServer - This structure represents the definition of a BigFix server
@@ -18,7 +19,8 @@ type BFServer struct {
 
 // BFSession - Represents a persistent connection to a BigFix server
 type BFSession struct {
-	Conn *http.Client
+	Server *BFServer
+	Conn   *http.Client
 }
 
 // BFSrQuery - Represents a session relevance query
@@ -41,6 +43,8 @@ func NewBFSession(srv BFServer) (*BFSession, error) {
 	cli := &http.Client{Transport: customTransport}
 
 	client.Conn = cli
+	client.Server = &srv
+
 	return &client, nil
 }
 
@@ -69,8 +73,40 @@ func Query(srv BFServer, query *BFSrQuery) (string, error) {
 // SessionQuery - A session based Session Relevance query using a BFServer.
 // This uses a persisten session. Useful for many queries in a single program
 // or operation.
-func SessionQuery(sess BFSession, query *BFSrQuery) (string, error) {
-	return "", nil
+func SessionQuery(sess *BFSession, query *BFSrQuery) (string, error) {
+	var apiurl string
+
+	apiurl, _ = BaseBFURL(*sess.Server)
+	apiurl = apiurl + "/api/query"
+
+	data := url.Values{}
+	data.Set("relevance", query.SessionRelevance)
+
+	req, err := http.NewRequest("POST", apiurl, strings.NewReader(data.Encode()))
+
+	if err != nil {
+		return "", err
+	}
+
+	req.SetBasicAuth(sess.Server.Username, sess.Server.Password)
+
+	//	req.Body = url.Values{"relevance": {query.SessionRelevance}}
+
+	resp, err := sess.Conn.Do(req)
+
+	if err != nil {
+		return "", err
+	}
+
+	defer resp.Body.Close()
+
+	rtext, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(rtext), nil
 }
 
 // MakeSrQuery - Make a query struct from a string
