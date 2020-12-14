@@ -31,7 +31,7 @@ type BFSrQuery struct {
 
 // BaseBFURL - returns a URL for the BFServer passed in
 func BaseBFURL(srv BFServer) (string, int) {
-	return "https://" + srv.Username + ":" + srv.Password + "@" + srv.Name + ":" + srv.Port, 0
+	return "https://" + srv.Name + ":" + srv.Port, 0
 }
 
 // NewBFSession - Create and return a BFSession for a given BFServer
