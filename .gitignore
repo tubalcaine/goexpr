@@ -23,3 +23,4 @@ bin/gocode
 bin/go-outline
 bin/gocode-gomod
 bin/dlv
+bfquery
