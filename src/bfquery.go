@@ -3,6 +3,7 @@ package main
 import (
 	"bigfix"
 	"fmt"
+	"os"
 
 	"gopkg.in/urfave/cli.v1"
 )
@@ -65,4 +66,5 @@ func main() {
 		return nil
 	}
 
+	bfqueryApp.Run(os.Args)
 }
