@@ -11,6 +11,8 @@ import (
 func main() {
 	var server bigfix.BFServer
 
+	myargs := os.Args
+
 	bfqueryApp := cli.NewApp()
 
 	bfqueryApp.Name = "bfquery"
@@ -66,5 +68,5 @@ func main() {
 		return nil
 	}
 
-	bfqueryApp.Run(os.Args)
+	bfqueryApp.Run(myargs)
 }
