@@ -24,3 +24,5 @@ bin/go-outline
 bin/gocode-gomod
 bin/dlv
 bfquery
+.vscode/settings.json
+.vscode/launch.json
