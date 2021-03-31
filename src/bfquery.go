@@ -25,7 +25,7 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:  "server, s",
-			Value: "10.10.220.59",
+			Value: "10.10.220.60",
 			Usage: "Name or address of BigFix root server",
 		},
 		cli.StringFlag{
