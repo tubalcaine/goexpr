@@ -49,7 +49,7 @@ func NewBFSession(srv BFServer) (*BFSession, error) {
 }
 
 // Query - A standalone Session Relevance query using a BFServer. Not
-// a persisten session. Useful for rare, one-off queries. Use a session based
+// a persistent session. Useful for rare, one-off queries. Use a session based
 // function when you are doing a lot of operations.
 func Query(srv BFServer, query *BFSrQuery) (string, error) {
 	var apiurl string
@@ -71,7 +71,7 @@ func Query(srv BFServer, query *BFSrQuery) (string, error) {
 }
 
 // SessionQuery - A session based Session Relevance query using a BFServer.
-// This uses a persisten session. Useful for many queries in a single program
+// This uses a persistent session. Useful for many queries in a single program
 // or operation.
 func SessionQuery(sess *BFSession, query *BFSrQuery) (string, error) {
 	var apiurl string
