@@ -27,3 +27,4 @@ bfquery
 .vscode/settings.json
 .vscode/launch.json
 src/somefile.txt
+bin/gomodifytags
