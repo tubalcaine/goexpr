@@ -17,6 +17,9 @@ type BFServer struct {
 	Password string
 }
 
+type BFAPIItem interface {
+}
+
 // BFSession - Represents a persistent connection to a BigFix server
 type BFSession struct {
 	Server *BFServer
