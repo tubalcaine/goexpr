@@ -28,3 +28,4 @@ bfquery
 .vscode/launch.json
 src/somefile.txt
 bin/gomodifytags
+bin/gotests
