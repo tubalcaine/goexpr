@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bigfix"
 	"fmt"
 	"os"
 
+	"github.com/tubalcaine/bigfix-core-api"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -13,19 +13,9 @@ pkg/
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-bin/goreturns
-bin/gopls
-bin/gopkgs
-bin/golint
-bin/godef
-bin/gocode
-
-bin/go-outline
-bin/gocode-gomod
-bin/dlv
+bin/*
 bfquery
 .vscode/settings.json
 .vscode/launch.json
 src/somefile.txt
-bin/gomodifytags
-bin/gotests
+src/go.sum
